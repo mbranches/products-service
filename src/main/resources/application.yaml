@@ -16,3 +16,7 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: validate
+
+jwt:
+  secret:
+    key: ${ENV_JWT_SECRET_KEY}
