@@ -1,0 +1,1 @@
+# API Restful desenvolvida a fim de pôr em prática meus conhecimentos em Spring Security com Autenticação JWT.
