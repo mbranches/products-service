@@ -32,5 +32,5 @@ CREATE TABLE IF NOT EXISTS user_role (
     FOREIGN KEY (role_id) REFERENCES role(id)
 );
 
-INSERT IGNORE INTO role(id, name, description) VALUES (1, 'admin', 'has all system accesses');
-INSERT IGNORE INTO role(id, name, description) VALUES (2, 'basic', 'has limited system accesses');
+INSERT IGNORE INTO role(id, name, description) VALUES (1, 'ADMIN', 'has all system accesses');
+INSERT IGNORE INTO role(id, name, description) VALUES (2, 'BASIC', 'has limited system accesses');
