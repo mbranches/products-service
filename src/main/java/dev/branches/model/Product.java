@@ -1,4 +1,4 @@
-package dev.branches.mode;
+package dev.branches.model;
 
 import jakarta.persistence.*;
 import lombok.*;
