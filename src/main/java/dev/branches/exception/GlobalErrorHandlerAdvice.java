@@ -12,4 +12,11 @@ public class GlobalErrorHandlerAdvice {
 
         return ResponseEntity.status(e.getStatusCode()).body(error);
     }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<DefaultMessageError> handlerNotFoundException(NotFoundException e) {
+        DefaultMessageError error = new DefaultMessageError(e.getStatusCode().value(), e.getReason());
+
+        return ResponseEntity.status(e.getStatusCode()).body(error);
+    }
 }
