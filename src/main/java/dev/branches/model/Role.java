@@ -20,13 +20,7 @@ public class Role {
     private String description;
 
     public enum RoleType {
-        ADMIN("admin"),
-        BASIC("basic");
-
-        String name;
-
-        RoleType(String name) {
-            this.name = name;
-        }
+        admin,
+        basic
     }
 }
