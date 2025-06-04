@@ -3,6 +3,7 @@ package dev.branches.service;
 import dev.branches.controller.LoginPostResponse;
 import dev.branches.dto.LoginPostRequest;
 import dev.branches.dto.RegisterPostRequest;
+import dev.branches.exception.BadRequestException;
 import dev.branches.model.Role;
 import dev.branches.model.Role.RoleType;
 import dev.branches.model.User;
@@ -39,7 +40,7 @@ public class UserService {
     }
 
     public void createUser(RegisterPostRequest request) {
-        if (repository.findByLogin(request.login()).isPresent()) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Login is already registered");
+        if (repository.findByLogin(request.login()).isPresent()) throw new BadRequestException("Login is already registered");
 
         Role basicRole = roleService.findByName(RoleType.BASIC);
 
