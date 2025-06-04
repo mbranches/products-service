@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS role (
 
 CREATE TABLE IF NOT EXISTS user (
     id varchar(36) PRIMARY KEY,
-    login varchar(50) NOT NULL,
+    login varchar(50) NOT NULL UNIQUE,
     password varchar(100) NOT NULL
 );
 
