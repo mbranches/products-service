@@ -1,0 +1,9 @@
+services:
+  mysql:
+    container_name: products-db
+    image: mysql:9.0.1
+    environment:
+      - MYSQL_ROOT_PASSWORD=${ENV_MYSQL_PASSWORD}
+      - MYSQL_DATABASE=products_service
+    ports:
+      - "3308:3306"

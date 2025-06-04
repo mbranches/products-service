@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: products
+  config:
+    import: optional:classpath:.env[.properties]
+  datasource:
+    url: jdbc:mysql://localhost:3308/products_service
+    username: root
+    password: ${ENV_MYSQL_PASSWORD}
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+      ddl-auto: update
