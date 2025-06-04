@@ -1,7 +1,9 @@
 package dev.branches.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 
+@Getter
 @Entity(name = "user_role")
 public class UserRole {
     @Id
