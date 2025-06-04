@@ -41,7 +41,7 @@ public class UserService {
     public void createUser(RegisterPostRequest request) {
         if (repository.findByLogin(request.login()).isPresent()) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Login is already registered");
 
-        Role basicRole = roleService.findByName(RoleType.basic);
+        Role basicRole = roleService.findByName(RoleType.BASIC);
 
         User userToSave = new User();
         userToSave.setLogin(request.login());
