@@ -17,6 +17,6 @@ public class Sale {
     private Product product;
     @Column(nullable = false)
     private Integer quantity;
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "DECIMAL")
     private Double totalValue;
 }

@@ -16,7 +16,7 @@ public class Product {
     private Long id;
     @Column(nullable = false)
     private String name;
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "DECIMAL")
     private Double unitPrice;
 
     public static Product of(ProductPostRequest postRequest) {
