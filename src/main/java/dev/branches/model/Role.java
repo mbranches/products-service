@@ -20,7 +20,7 @@ public class Role {
     private String description;
 
     public enum RoleType {
-        admin,
-        basic
+        ADMIN,
+        BASIC
     }
 }
