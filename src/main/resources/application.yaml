@@ -1,4 +1,8 @@
 spring:
+  sql:
+    init:
+      schema-locations: classpath:sql/schema.sql
+      mode: always
   application:
     name: products
   config:
@@ -11,4 +15,4 @@ spring:
     database: mysql
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
