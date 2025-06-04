@@ -14,7 +14,19 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
-    private String name;
+    @Enumerated(EnumType.STRING)
+    private RoleType name;
     @Column(nullable = false)
     private String description;
+
+    public enum RoleType {
+        ADMIN("admin"),
+        BASIC("basic");
+
+        String name;
+
+        RoleType(String name) {
+            this.name = name;
+        }
+    }
 }
