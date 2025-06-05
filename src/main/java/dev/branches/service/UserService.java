@@ -37,7 +37,7 @@ public class UserService {
         return new LoginPostResponse(jwtTokenService.generateKey(user));
     }
 
-    public void createUser(RegisterPostRequest request) {
+    public void registerUser(RegisterPostRequest request) {
         if (repository.findByLogin(request.login()).isPresent()) throw new BadRequestException("Login is already registered");
 
         Role basicRole = roleService.findByName(RoleType.BASIC);
