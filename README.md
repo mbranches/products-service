@@ -2,6 +2,15 @@
 
 > API Restful desenvolvida a fim de pôr em prática os meus conhecimentos em Spring Security com Autenticação JWT.
 
+## 📋 Índice
+
+- [Funcionalidades](#-funcionalidades)
+- [Tecnologias Utilizadas](#-tecnologias-utilizadas)
+- [Endpoints](#-endpoints)
+- [Exemplos de uso](#-exemplos-de-uso)
+- [Como Rodar a Aplicação](#-como-rodar-a-aplicação)
+- [Testando a API com Postman](#-testando-a-api-com-postman)
+
 ## ⚙️ Funcionalidades
 
 * ✅ **Sistema de Autenticação e Autorização Robusto**: Implementado com **Spring Security** e **JWT** para controle de acesso baseado em roles.
