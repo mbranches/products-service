@@ -43,6 +43,15 @@ public class SaleController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/me/{id}/details")
+    public ResponseEntity<SaleBySaleDetailsGetResponse> findMySaleDetailsById(Authentication authentication, @PathVariable Long id) {
+        User user = (User) authentication.getPrincipal();
+
+        SaleBySaleDetailsGetResponse response = service.findMySaleDetailsById(user, id);
+
+        return ResponseEntity.ok(response);
+    }
+
     @PostMapping
     public ResponseEntity<SalePostResponse> create(Authentication authentication, @RequestBody SalePostRequest request) {
         User user = (User) authentication.getPrincipal();

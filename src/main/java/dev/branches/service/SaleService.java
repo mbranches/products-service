@@ -8,8 +8,10 @@ import dev.branches.model.SaleProduct;
 import dev.branches.model.User;
 import dev.branches.repository.SaleRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -38,6 +40,16 @@ public class SaleService {
 
     public SaleBySaleDetailsGetResponse findSaleDetailsById(Long id) {
         Sale sale = findByIdOrThrowsNotFoundException(id);
+
+        List<SaleProduct> products = saleProductService.findAllBySaleId(sale.getId());
+
+        return SaleBySaleDetailsGetResponse.of(sale, products);
+    }
+
+    public SaleBySaleDetailsGetResponse findMySaleDetailsById(User user, Long id) {
+        Sale sale = findByIdOrThrowsNotFoundException(id);
+
+        if (!sale.getUser().equals(user)) throw new ResponseStatusException(HttpStatus.FORBIDDEN);
 
         List<SaleProduct> products = saleProductService.findAllBySaleId(sale.getId());
 
