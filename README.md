@@ -24,6 +24,16 @@
 > - Login: admin
 > - Senha: admin
 
+## 💻 Tecnologias Utilizadas
+
+- **Spring Boot** – Framework principal para criação da API REST.
+- **Spring Security** – Implementação da autenticação e autorização com JWT.
+- **Spring Data JPA** – Integração com banco de dados usando repositórios e consultas com JPA.
+- **Hibernate** – Implementação ORM (mapeamento objeto-relacional) apenas para a validação do Schema.
+- **MySQL** – Banco de dados relacional utilizado na aplicação.
+- **Docker** – Containerização do banco de dados.
+- **Maven** – Gerenciador de dependências e automação de build.
+
 ## 📚 Endpoints
 
 | Método | Rota                  | Descrição                       | Permissão   |
@@ -152,16 +162,6 @@ Authorization: Bearer {seu-token}
   } 
 ]
 ```
-
-## 💻 Tecnologias Utilizadas
-
-- **Spring Boot** – Framework principal para criação da API REST.
-- **Spring Security** – Implementação da autenticação e autorização com JWT.
-- **Spring Data JPA** – Integração com banco de dados usando repositórios e consultas com JPA.
-- **Hibernate** – Implementação ORM (mapeamento objeto-relacional) apenas para a validação do Schema.
-- **MySQL** – Banco de dados relacional utilizado na aplicação.
-- **Docker** – Containerização do banco de dados.
-- **Maven** – Gerenciador de dependências e automação de build.
 
 ## 🚀 Como Rodar a Aplicação
 
