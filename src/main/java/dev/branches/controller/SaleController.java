@@ -1,5 +1,6 @@
 package dev.branches.controller;
 
+import dev.branches.dto.SaleBySaleDetailsGetResponse;
 import dev.branches.dto.SaleGetResponse;
 import dev.branches.dto.SalePostRequest;
 import dev.branches.dto.SalePostResponse;
@@ -22,6 +23,13 @@ public class SaleController {
     @GetMapping
     public ResponseEntity<List<SaleGetResponse>> findAll() {
         List<SaleGetResponse> response = service.findAll();
+
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/{id}/details")
+    public ResponseEntity<SaleBySaleDetailsGetResponse> findSaleDetailsById(@PathVariable Long id) {
+        SaleBySaleDetailsGetResponse response = service.findSaleDetailsById(id);
 
         return ResponseEntity.ok(response);
     }

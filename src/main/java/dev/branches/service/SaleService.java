@@ -1,6 +1,7 @@
 package dev.branches.service;
 
 import dev.branches.dto.*;
+import dev.branches.exception.NotFoundException;
 import dev.branches.model.Product;
 import dev.branches.model.Sale;
 import dev.branches.model.SaleProduct;
@@ -34,6 +35,19 @@ public class SaleService {
         return sales.stream()
                 .map(SaleGetResponse::of)
                 .toList();
+    }
+
+    public SaleBySaleDetailsGetResponse findSaleDetailsById(Long id) {
+        Sale sale = findByIdOrThrowsNotFoundException(id);
+
+        List<SaleProduct> products = saleProductService.findAllBySaleId(sale.getId());
+
+        return SaleBySaleDetailsGetResponse.of(sale, products);
+    }
+
+    public Sale findByIdOrThrowsNotFoundException(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Sale with id '%s' not found".formatted(id)));
     }
 
     @Transactional
