@@ -13,10 +13,9 @@ public class Sale {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne(optional = false)
-    private Product product;
-    @Column(nullable = false)
-    private Integer quantity;
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private User user;
     @Column(nullable = false, columnDefinition = "DECIMAL")
     private Double totalValue;
 }
