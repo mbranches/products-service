@@ -18,7 +18,6 @@ import java.util.List;
 public class SaleService {
     private final SaleRepository repository;
     private final SaleProductService saleProductService;
-    private final UserService userService;
     private final ProductService productService;
 
     public List<SaleGetResponse> findAll() {
