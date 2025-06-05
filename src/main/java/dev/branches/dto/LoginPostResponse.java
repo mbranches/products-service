@@ -1,4 +1,4 @@
-package dev.branches.controller;
+package dev.branches.dto;
 
 public record LoginPostResponse(String token) {
 }

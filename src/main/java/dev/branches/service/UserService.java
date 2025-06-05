@@ -1,6 +1,6 @@
 package dev.branches.service;
 
-import dev.branches.controller.LoginPostResponse;
+import dev.branches.dto.LoginPostResponse;
 import dev.branches.dto.LoginPostRequest;
 import dev.branches.dto.RegisterPostRequest;
 import dev.branches.exception.BadRequestException;

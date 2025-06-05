@@ -1,6 +1,7 @@
 package dev.branches.controller;
 
 import dev.branches.dto.LoginPostRequest;
+import dev.branches.dto.LoginPostResponse;
 import dev.branches.dto.RegisterPostRequest;
 import dev.branches.service.UserService;
 import lombok.RequiredArgsConstructor;
