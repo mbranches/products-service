@@ -67,4 +67,10 @@ public class UserService {
 
         return UserPostResponse.of(savedUser);
     }
+
+    public List<UserGetResponse> findAll() {
+        List<User> users = repository.findAll();
+
+        return users.stream().map(UserGetResponse::of).toList();
+    }
 }
