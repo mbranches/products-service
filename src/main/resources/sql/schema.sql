@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS role (
     id bigint PRIMARY KEY AUTO_INCREMENT,
     name varchar(50) NOT NULL,
-    description varchar(50)
+    description varchar(150)
 );
 
 CREATE TABLE IF NOT EXISTS user (
