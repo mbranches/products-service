@@ -4,21 +4,23 @@
 
 ## ⚙️ Funcionalidades
 
-- ✅ **Cadastro de usuários**
-    - Qualquer pessoa pode se registrar.
-    - Usuários são cadastrados com a role padrão: `BASIC`.
+* ✅ **Sistema de Autenticação e Autorização Robusto**: Implementado com **Spring Security** e **JWT** para controle de acesso baseado em roles.
+    - Hierarquia de Roles: As roles seguem uma hierarquia de privilégios: `ADMIN` $\rightarrow$ `MANAGER` $\rightarrow$ `BASIC`. Um usuário com uma role superior herda todas as permissões das roles inferiores.
 
-- 📦 **Cadastro de produtos**
-    - Acesso restrito a usuários com a role `ADMIN`.
+* 👥 Gerenciamento de Usuários:
+    - Registro Público: Qualquer pessoa pode se registrar. Usuários são cadastrados com a role padrão: `BASIC`.
+    - Autenticação de Usuários: Usuários já registrados podem autenticar-se via login.
+    - Criação por ADMIN: Usuários com a role `ADMIN` podem criar novos usuários com a role desejada (`BASIC`, `MANAGER` ou `ADMIN`).
+    - Listagem de Usuários: Acesso restrito a usuários com role mínima `MANAGER`.
 
-- 💰 **Cadastro de vendas**
-    - Apenas usuários com a role `ADMIN` têm permissão para cadastrar vendas.
-
-- 🛒 **Listagem de vendas**
-    - Disponível para qualquer usuário autenticado (`BASIC` ou `ADMIN`).
-
-- 📄 **Listagem de produtos**
-    - Acessível a todos os usuários autenticados.
+* 💰 Gerenciamento de Vendas:
+    - Cadastro de Vendas: Apenas usuários com a role `ADMIN` têm permissão para cadastrar vendas.
+    - Listagem de Vendas:
+        - Todas as Vendas: Usuários com role mínima de `MANAGER` podem listar todas as vendas do sistema.
+        - Minhas compras: Qualquer usuário autenticado (`BASIC`, `MANAGER`, `ADMIN`) pode listar suas próprias compras.
+    - Detalhes de Vendas:
+        - Detalhes de Qualquer Venda: Usuários com as roles `ADMIN` ou `MANAGER` podem visualizar os detalhes de qualquer venda.
+        - Detalhes das Próprias Compras: Qualquer usuário autenticado (`BASIC`, `MANAGER`, `ADMIN`) pode consultar os detalhes de suas próprias compras.
 
 > 🔐 Usuário padrão: Ao inicializar a aplicação é adicionado um usuário ADMIN padrão com:
 > - Login: admin
@@ -36,18 +38,23 @@
 
 ## 📚 Endpoints
 
-| Método | Rota                  | Descrição                       | Permissão   |
-|--------|-----------------------|---------------------------------|-------------|
-| POST   | /api/v1/auth/login    | Autenticação e geração de token | Pública     |
-| POST   | /api/v1/auth/register | Cadastro de novo usuário        | Pública     |
-| GET    | /api/v1/products      | Listar produtos                 | Autenticado |
-| POST   | /api/v1/products      | Cadastrar produto               | ADMIN       |
-| GET    | /api/v1/sales         | Listar vendas                   | Autenticado |
-| POST   | /api/v1/sales         | Cadastrar venda                 | ADMIN       |
+| Método | Rota                            | Descrição                                  | Permissão                            |
+|:-------|:--------------------------------|:-------------------------------------------|:-------------------------------------|
+| `POST` | `/api/v1/auth/login`            | Autenticação e geração de token            | Pública                              |
+| `POST` | `/api/v1/auth/register`         | Cadastro de novo usuário com role `BASIC`  | Pública                              |
+| `POST` | `/api/v1/users`                 | Cadastrar novo usuário                     | `ADMIN`                              |
+| `GET`  | `/api/v1/users`                 | Listar todos os usuários                   | `MANAGER` (e `ADMIN` por hierarquia) |
+| `GET`  | `/api/v1/products`              | Listar todos os produtos                   | Autenticado                          |
+| `POST` | `/api/v1/products`              | Cadastrar novo produto                     | `ADMIN`                              |
+| `GET`  | `/api/v1/sales`                 | Listar todas as vendas do sistema          | `ADMIN` (e `MANAGER` por hierarquia) |
+| `GET`  | `/api/v1/sales/{id}/details`    | Obter detalhes de qualquer venda por ID    | `ADMIN` (e `MANAGER` por hierarquia) |
+| `GET`  | `/api/v1/sales/me`              | Listar vendas do usuário autenticado       | Autenticado                          |
+| `GET`  | `/api/v1/sales/me/{id}/details` | Obter detalhes de sua própria venda por ID | Autenticado                          |
+| `POST` | `/api/v1/sales`                 | Cadastrar nova venda                       | `ADMIN`                              |
 
 ## 🧪 Exemplos de Uso
 
-### 🔐 Autenticação
+### Autenticação (Público)
 
 **Requisição:**
 ```http
@@ -69,98 +76,303 @@ Content-Type: application/json
 
 Obs: o token é meramente ilustrativo
 
-### 📦 Cadastro de Produto (ADMIN)
+### Registro de Usuário (Público)
+
+**Requisição:**
+```http
+POST /api/v1/auth/register
+Content-Type: application/json
+
+{
+  "login": "marcus.branches",
+  "password": "senhaSegura123"
+}
+```
+
+**Resposta Esperada:**
+```http
+HTTP/1.1 201 Created
+```
+
+### Criação de Usuário (ADMIN)
+
+**Requisição:**
+```http
+POST /api/v1/users
+Authorization: Bearer {seu-token-ADMIN}
+Content-Type: application/json
+
+{
+    "login": "manager",
+    "password": "Senh@Muit0S3gur4_",
+    "roles": [
+        "MANAGER"
+    ]
+}
+```
+
+**Resposta Esperada:**
+```http
+{
+    "id": "f7f46b8d-28ec-41a3-a885-bdd7a6a3aec0",
+    "login": "manager",
+    "encryptedPassword": "$2a$10$gPFpnoiKPmxGLuo2LqW8oeFygTP//dLzZX2qjKWvgzqwHIa8EqyJy",
+    "roles": [
+        {
+            "role": "MANAGER",
+            "description": "has limited access to administrative and management functionalities"
+        }
+    ]
+}
+```
+
+### Listagem de Usuários (MANAGER / ADMIN)
+
+**Requisição:**
+```http
+GET /api/v1/users
+Authorization: Bearer {seu-token-MANAGER-OU-ADMIN}
+```
+
+**Resposta Esperada:**
+```http
+[
+  {
+    "id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "login": "admin",
+    "encryptedPassword": "$2a$10$gPFpnoiKPmxGLuo2LqW8oeFygTP//dLzZX2qjKWvgzqwHIa8EqyJy",
+    "roles": [
+      {
+        "role": "ADMIN",
+        "description": "has all system accesses"
+      }
+    ]
+  },
+  {
+    "id": "f7f46b8d-28ec-41a3-a885-bdd7a6a3aec0",
+    "login": "manager",
+    "encryptedPassword": "$2a$10$gPFpnoiKPmxGLuo2LqW8oeFygTP//dLzZX2qjKWvgzqwHIa8EqyJy",
+    "roles": [
+      {
+        "role": "MANAGER",
+        "description": "has limited access to administrative and management functionalities"
+      }
+    ]
+  }
+```
+
+### Cadastro de Produto (ADMIN)
 
 **Requisição:**
 ```http
 POST /api/v1/products
-Authorization: Bearer {seu-token}
+Authorization: Bearer {seu-token-ADMIN}
 Content-Type: application/json
 
 {
-  "name": "Notebook Lenovo",
-  "unitPrice": 3500.00
+  "name": "Monitor UltraWide LG",
+  "unitPrice": 1800.00
 }
 ```
 
 **Resposta Esperada:**
-```
+```http
 {
   "id": 1,
-  "name": "Notebook Lenovo",
-  "unitPrice": 3500.00
+  "name": "Monitor UltraWide LG",
+  "unitPrice": 1800.00
 }
 ```
 
-### 💰 Cadastro de vendas (ADMIN)
-
-**Requisição:**
-```http
-POST /api/v1/sales
-Authorization: Bearer {seu-token}
-Content-Type: application/json
-
-{
-  "productId": 1,
-  "quantity": 10
-}
-```
-
-**Resposta Esperada:**
-```
-{
-  "id": 1,
-  "product": {
-    "id": 1,
-    "name": "Notebook Lenovo",
-    "unitPrice": 3500.00
-  },
-  "quantity": 10,
-  "totalValue": 35000.00
-}
-```
-
-### 🛒 Listagem de vendas
-
-**Requisição:**
-```http
-GET /api/v1/sales
-Authorization: Bearer {seu-token}
-```
-
-**Resposta esperada:**
-```
-[
-  {
-    "id": 1,
-    "product": {
-      "id": 1,
-      "name": "Notebook Lenovo",
-      "unitPrice": 3500.00
-    },
-    "quantity": 10,
-    "totalValue": 35000.00
-  }
-]
-```
-
-## 📄 Listagem de produtos
+### Listagem de Produtos (Qualquer Usuário Autenticado)
 
 **Requisição:**
 ```http
 GET /api/v1/products
-Authorization: Bearer {seu-token}
+Authorization: Bearer {seu-token-QUALQUER-AUTENTICADO}
 ```
 
-**Resposta esperada:**
-```
+**Resposta Esperada:**
+```http
 [
   {
     "id": 1,
-    "name": "Notebook Lenovo",
-    "unitPrice": 3500.00
-  } 
+    "name": "Monitor UltraWide LG",
+    "unitPrice": 1800.00
+  },
+  {
+    "id": 2,
+    "name": "Teclado Mecânico HyperX",
+    "unitPrice": 450.00
+  },
+  {
+    "id": 3,
+    "name": "Mouse Gamer Logitech",
+    "unitPrice": 250.00
+  }
 ]
+```
+
+### Cadastro de Vendas (Qualquer Usuário Autenticado)
+
+**Requisição:**
+```http
+POST /api/v1/sales
+Authorization: Bearer {seu-token-QUALQUER-AUTENTICADO}
+Content-Type: application/json
+
+{
+  "products": [
+    {
+      "productId": 1,
+      "quantity": 5
+    },
+    {
+      "productId": 2,
+      "quantity": 2
+    }
+  ]
+}
+```
+
+**Resposta Esperada:**
+```http
+{
+  "id": 1,
+  "user": {
+    "id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "login": "usuario.autenticado"
+  },
+  "products": [
+    {
+      "name": "Monitor UltraWide LG",
+      "unitPrice": 1800.00,
+      "quantity": 5,
+      "totalValue": 9000.00
+    },
+    {
+      "name": "Teclado Mecânico HyperX",
+      "unitPrice": 450.00,
+      "quantity": 2,
+      "totalValue": 900.00
+    }
+  ],
+  "totalValue": 9900.00
+}
+```
+
+### Listagem de Vendas (ADMIN - Todas as Vendas)
+
+**Requisição:**
+```http
+GET /api/v1/sales
+Authorization: Bearer {seu-token-ADMIN}
+```
+
+**Resposta Esperada:**
+```http
+[
+  {
+    "id": 1,
+    "user": {
+      "id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+      "login": "admin"
+    },
+    "totalValue": 9900.00
+  },
+  {
+    "id": 2,
+    "user": {
+      "id": "b1c2d3e4-f5a6-7890-1234-567890abcdef",
+      "login": "usuario.basico"
+    },
+    "totalValue": 250.00
+  }
+]
+```
+
+### Listagem de Vendas (Usuário Autenticado - Minhas Compras)
+
+**Requisição:**
+```http
+GET /api/v1/sales/me
+Authorization: Bearer {seu-token-AUTENTICADO}
+```
+
+**Resposta Esperada:**
+```http
+[
+  {
+    "id": 2,
+    "user": {
+      "id": "b1c2d3e4-f5a6-7890-1234-567890abcdef",
+      "login": "usuario.basico"
+    },
+    "totalValue": 250.00
+  }
+]
+```
+
+### Detalhes de Venda (ADMIN / MANAGER - Qualquer Venda)
+
+**Requisição:**
+```http
+GET /api/v1/sales/1/details
+Authorization: Bearer {seu-token-ADMIN-OU-MANAGER}
+```
+
+**Resposta Esperada:**
+```http
+{
+  "id": 1,
+  "user": {
+    "id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "login": "usuario.basic"
+  },
+  "products": [
+    {
+      "name": "Monitor UltraWide LG",
+      "unitPrice": 1800.00,
+      "quantity": 5,
+      "totalValue": 9000.00
+    },
+    {
+      "name": "Teclado Mecânico HyperX",
+      "unitPrice": 450.00,
+      "quantity": 2,
+      "totalValue": 900.00
+    }
+  ],
+  "totalValue": 9900.00
+}
+```
+
+### Detalhes de Venda (Usuário Autenticado - Compra Específica)
+
+**Requisição:**
+```http
+GET /api/v1/sales/me/2/details
+Authorization: Bearer {seu-token-BASIC-OU-MANAGER}
+```
+
+**Resposta Esperada:**
+```http
+{
+  "id": 2,
+  "user": {
+    "id": "b1c2d3e4-f5a6-7890-1234-567890abcdef",
+    "login": "marcus.branches"
+  },
+  "products": [
+    {
+      "name": "Mouse Gamer Logitech",
+      "unitPrice": 250.00,
+      "quantity": 1,
+      "totalValue": 250.00
+    }
+  ],
+  "totalValue": 250.00
+}
 ```
 
 ## 🚀 Como Rodar a Aplicação
