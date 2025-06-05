@@ -1,8 +1,6 @@
 package dev.branches.service;
 
-import dev.branches.dto.LoginPostResponse;
-import dev.branches.dto.LoginPostRequest;
-import dev.branches.dto.RegisterPostRequest;
+import dev.branches.dto.*;
 import dev.branches.exception.BadRequestException;
 import dev.branches.model.Role;
 import dev.branches.model.Role.RoleType;
@@ -51,5 +49,22 @@ public class UserService {
         userToSave.setRoles(List.of(userRole));
 
         repository.save(userToSave);
+    }
+
+    public UserPostResponse createUser(UserPostRequest request) {
+        String login = request.login();
+        if (repository.findByLogin(login).isPresent()) throw new BadRequestException("Login is already registered");
+
+        List<Role> roles = request.roles().stream().map(roleService::findByName).toList();
+
+        User user = new User();
+        user.setLogin(login);
+        user.setPassword(passwordEncoder.encode(request.password()));
+        List<UserRole> userRoles = roles.stream().map(role -> UserRole.builder().user(user).role(role).build()).toList();
+        user.setRoles(userRoles);
+
+        User savedUser = repository.save(user);
+
+        return UserPostResponse.of(savedUser);
     }
 }
