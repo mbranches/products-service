@@ -1,11 +1,15 @@
 package dev.branches.dto;
 
 import dev.branches.model.Sale;
+import dev.branches.model.SaleProduct;
 
-public record SaleGetResponse(Long id, ProductBySaleGetResponse product, Integer quantity, Double totalValue) {
+import java.util.List;
+
+public record SaleGetResponse(Long id, UserBySaleGetResponse user, Double totalValue) {
     public static SaleGetResponse of(Sale sale) {
-        ProductBySaleGetResponse product = ProductBySaleGetResponse.of(sale.getProduct());
+        UserBySaleGetResponse user = UserBySaleGetResponse.of(sale.getUser());
 
-        return new SaleGetResponse(sale.getId(), product, sale.getQuantity(), sale.getTotalValue());
+
+        return new SaleGetResponse(sale.getId(), user, sale.getTotalValue());
     }
 }
