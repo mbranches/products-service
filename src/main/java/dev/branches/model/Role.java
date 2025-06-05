@@ -21,6 +21,7 @@ public class Role {
 
     public enum RoleType {
         ADMIN,
-        BASIC
+        BASIC,
+        MANAGER
     }
 }
