@@ -26,6 +26,15 @@ public class SaleController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/me")
+    public ResponseEntity<List<SaleGetResponse>> findMySales(Authentication authentication) {
+        User user = (User) authentication.getPrincipal();
+
+        List<SaleGetResponse> response = service.findAllByUser(user);
+
+        return ResponseEntity.ok(response);
+    }
+
     @PostMapping
     public ResponseEntity<SalePostResponse> create(Authentication authentication, @RequestBody SalePostRequest request) {
         User user = (User) authentication.getPrincipal();

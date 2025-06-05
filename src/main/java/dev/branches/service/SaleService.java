@@ -28,6 +28,14 @@ public class SaleService {
                 .toList();
     }
 
+    public List<SaleGetResponse> findAllByUser(User user) {
+        List<Sale> sales = repository.findAllByUser(user);
+
+        return sales.stream()
+                .map(SaleGetResponse::of)
+                .toList();
+    }
+
     @Transactional
     public SalePostResponse create(User user, SalePostRequest request) {
         List<SaleProduct> saleProductList = request.products()
