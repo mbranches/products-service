@@ -3,6 +3,7 @@ package dev.branches.controller;
 import dev.branches.dto.SaleGetResponse;
 import dev.branches.dto.SalePostRequest;
 import dev.branches.dto.SalePostResponse;
+import dev.branches.model.User;
 import dev.branches.service.SaleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,9 +28,9 @@ public class SaleController {
 
     @PostMapping
     public ResponseEntity<SalePostResponse> create(Authentication authentication, @RequestBody SalePostRequest request) {
-        String userLogin = (String) authentication.getPrincipal();
+        User user = (User) authentication.getPrincipal();
 
-        SalePostResponse response = service.create(userLogin, request);
+        SalePostResponse response = service.create(user, request);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }

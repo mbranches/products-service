@@ -29,9 +29,7 @@ public class SaleService {
     }
 
     @Transactional
-    public SalePostResponse create(String userLogin, SalePostRequest request) {
-        User user = userService.findByLoginOrThrowsNotFoundException(userLogin);
-
+    public SalePostResponse create(User user, SalePostRequest request) {
         List<SaleProduct> saleProductList = request.products()
                 .stream()
                 .map(saleProduct -> {
