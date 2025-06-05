@@ -1,12 +1,17 @@
 package dev.branches.dto;
 
 import dev.branches.model.Sale;
+import dev.branches.model.SaleProduct;
 
-public record SalePostResponse(Long id, ProductBySalePostResponse product, Integer quantity, Double totalValue) {
+import java.util.List;
 
-    public static SalePostResponse of(Sale sale) {
-        ProductBySalePostResponse product = ProductBySalePostResponse.of(sale.getProduct());
+public record SalePostResponse(Long id, UserBySalePostResponse user, List<SaleProductBySalePostResponse> products, Double totalValue) {
 
-        return new SalePostResponse(sale.getId(), product, sale.getQuantity(), sale.getTotalValue());
+    public static SalePostResponse of(Sale sale, List<SaleProduct> saleProductList) {
+        UserBySalePostResponse user = UserBySalePostResponse.of(sale.getUser());
+
+        List<SaleProductBySalePostResponse> products = saleProductList.stream().map(SaleProductBySalePostResponse::of).toList();
+
+        return new SalePostResponse(sale.getId(), user, products, sale.getTotalValue());
     }
 }

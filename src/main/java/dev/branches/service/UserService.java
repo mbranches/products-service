@@ -2,6 +2,7 @@ package dev.branches.service;
 
 import dev.branches.dto.*;
 import dev.branches.exception.BadRequestException;
+import dev.branches.exception.NotFoundException;
 import dev.branches.model.Role;
 import dev.branches.model.Role.RoleType;
 import dev.branches.model.User;
@@ -72,5 +73,10 @@ public class UserService {
         List<User> users = repository.findAll();
 
         return users.stream().map(UserGetResponse::of).toList();
+    }
+
+    public User findByLoginOrThrowsNotFoundException(String login) {
+        return repository.findByLogin(login)
+                .orElseThrow(() -> new NotFoundException("User with login '%s' not found".formatted(login)));
     }
 }

@@ -1,4 +1,6 @@
 package dev.branches.dto;
 
-public record SalePostRequest(Long productId, Integer quantity) {
+import java.util.List;
+
+public record SalePostRequest(List<SaleProductBySalePostRequest> products) {
 }
