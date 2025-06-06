@@ -94,7 +94,7 @@ Content-Type: application/json
 
 {
   "firstName": "Marcus",
-  "lastName:" "Branches",
+  "lastName": "Branches",
   "login": "marcus.branches",
   "password": "senhaSegura123"
 }
