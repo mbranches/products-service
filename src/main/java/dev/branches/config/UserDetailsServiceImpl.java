@@ -1,4 +1,4 @@
-package dev.branches.service;
+package dev.branches.config;
 
 import dev.branches.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

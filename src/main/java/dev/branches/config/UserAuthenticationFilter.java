@@ -1,8 +1,7 @@
-package dev.branches.security;
+package dev.branches.config;
 
 import dev.branches.model.User;
 import dev.branches.repository.UserRepository;
-import dev.branches.service.JwtTokenService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

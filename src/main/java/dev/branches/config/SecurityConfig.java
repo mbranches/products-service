@@ -1,6 +1,5 @@
 package dev.branches.config;
 
-import dev.branches.security.UserAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

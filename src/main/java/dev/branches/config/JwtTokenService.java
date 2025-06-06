@@ -1,4 +1,4 @@
-package dev.branches.service;
+package dev.branches.config;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
