@@ -1,8 +1,8 @@
 package dev.branches.controller;
 
-import dev.branches.dto.ProductGetResponse;
-import dev.branches.dto.ProductPostRequest;
-import dev.branches.dto.ProductPostResponse;
+import dev.branches.dto.response.ProductGetResponse;
+import dev.branches.dto.request.ProductPostRequest;
+import dev.branches.dto.response.ProductPostResponse;
 import dev.branches.service.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

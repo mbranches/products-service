@@ -1,4 +1,4 @@
-package dev.branches.dto;
+package dev.branches.dto.response;
 
 import dev.branches.model.Product;
 import dev.branches.model.SaleProduct;

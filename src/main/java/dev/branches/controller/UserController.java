@@ -1,8 +1,8 @@
 package dev.branches.controller;
 
-import dev.branches.dto.UserGetResponse;
-import dev.branches.dto.UserPostRequest;
-import dev.branches.dto.UserPostResponse;
+import dev.branches.dto.response.UserGetResponse;
+import dev.branches.dto.request.UserPostRequest;
+import dev.branches.dto.response.UserPostResponse;
 import dev.branches.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

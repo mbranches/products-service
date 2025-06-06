@@ -1,6 +1,9 @@
 package dev.branches.service;
 
-import dev.branches.dto.*;
+import dev.branches.dto.request.SalePostRequest;
+import dev.branches.dto.response.SaleBySaleDetailsGetResponse;
+import dev.branches.dto.response.SaleGetResponse;
+import dev.branches.dto.response.SalePostResponse;
 import dev.branches.exception.NotFoundException;
 import dev.branches.model.Product;
 import dev.branches.model.Sale;

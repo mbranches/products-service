@@ -1,6 +1,6 @@
 package dev.branches.model;
 
-import dev.branches.dto.ProductPostRequest;
+import dev.branches.dto.request.ProductPostRequest;
 import jakarta.persistence.*;
 import lombok.*;
 

@@ -1,9 +1,9 @@
 package dev.branches.controller;
 
-import dev.branches.dto.SaleBySaleDetailsGetResponse;
-import dev.branches.dto.SaleGetResponse;
-import dev.branches.dto.SalePostRequest;
-import dev.branches.dto.SalePostResponse;
+import dev.branches.dto.response.SaleBySaleDetailsGetResponse;
+import dev.branches.dto.response.SaleGetResponse;
+import dev.branches.dto.request.SalePostRequest;
+import dev.branches.dto.response.SalePostResponse;
 import dev.branches.model.User;
 import dev.branches.service.SaleService;
 import jakarta.validation.Valid;

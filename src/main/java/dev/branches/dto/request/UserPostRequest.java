@@ -1,8 +1,12 @@
-package dev.branches.dto;
+package dev.branches.dto.request;
 
+import dev.branches.model.Role.RoleType;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
-public record RegisterPostRequest(
+import java.util.List;
+
+public record UserPostRequest(
         @NotBlank(message = "The field 'firstName' is required")
         String firstName,
         @NotBlank(message = "The field 'lastName' is required")
@@ -10,5 +14,7 @@ public record RegisterPostRequest(
         @NotBlank(message = "The field 'login' is required")
         String login,
         @NotBlank(message = "The field 'password' is required")
-        String password
+        String password,
+        @NotNull(message = "The field 'roles' is required")
+        List<RoleType> roles
 ) {}
