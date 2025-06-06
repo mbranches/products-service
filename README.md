@@ -93,6 +93,8 @@ POST /api/v1/auth/register
 Content-Type: application/json
 
 {
+  "firstName": "Marcus",
+  "lastName:" "Branches",
   "login": "marcus.branches",
   "password": "senhaSegura123"
 }
@@ -112,6 +114,8 @@ Authorization: Bearer {seu-token-ADMIN}
 Content-Type: application/json
 
 {
+    "firstName": "Michael",
+    "lastName": "Souza",
     "login": "manager",
     "password": "Senh@Muit0S3gur4_",
     "roles": [
@@ -124,6 +128,8 @@ Content-Type: application/json
 ```http
 {
     "id": "f7f46b8d-28ec-41a3-a885-bdd7a6a3aec0",
+    "firstName": "Michael",
+    "lastName": "Souza",
     "login": "manager",
     "encryptedPassword": "$2a$10$gPFpnoiKPmxGLuo2LqW8oeFygTP//dLzZX2qjKWvgzqwHIa8EqyJy",
     "roles": [
@@ -250,7 +256,8 @@ Content-Type: application/json
   "id": 1,
   "user": {
     "id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
-    "login": "usuario.autenticado"
+    "firstName": "Marcus",
+    "lastName": "Branches"
   },
   "products": [
     {
@@ -285,7 +292,8 @@ Authorization: Bearer {seu-token-ADMIN}
     "id": 1,
     "user": {
       "id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
-      "login": "admin"
+      "firstName": "Marcus", 
+      "lastName": "Branches"
     },
     "totalValue": 9900.00
   },
@@ -293,7 +301,8 @@ Authorization: Bearer {seu-token-ADMIN}
     "id": 2,
     "user": {
       "id": "b1c2d3e4-f5a6-7890-1234-567890abcdef",
-      "login": "usuario.basico"
+      "firstName": "Lucas",
+      "lastName": "Prado"
     },
     "totalValue": 250.00
   }
@@ -315,7 +324,8 @@ Authorization: Bearer {seu-token-AUTENTICADO}
     "id": 2,
     "user": {
       "id": "b1c2d3e4-f5a6-7890-1234-567890abcdef",
-      "login": "usuario.basico"
+      "firstName": "Lucas",
+      "lastName": "Prado"
     },
     "totalValue": 250.00
   }
@@ -336,7 +346,8 @@ Authorization: Bearer {seu-token-ADMIN-OU-MANAGER}
   "id": 1,
   "user": {
     "id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
-    "login": "usuario.basic"
+    "firstName": "Marcus",
+    "lastName": "Branches"
   },
   "products": [
     {
@@ -370,7 +381,8 @@ Authorization: Bearer {seu-token-BASIC-OU-MANAGER}
   "id": 2,
   "user": {
     "id": "b1c2d3e4-f5a6-7890-1234-567890abcdef",
-    "login": "marcus.branches"
+    "firstName": "Lucas",
+    "lastName": "Prado"
   },
   "products": [
     {
