@@ -1,4 +1,11 @@
 package dev.branches.dto;
 
-public record ProductPostRequest(String name, Double unitPrice) {
-}
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
+public record ProductPostRequest(
+        @NotBlank(message = "The field 'name' is required")
+        String name,
+        @NotNull(message = "The field 'unitPrice' is required")
+        Double unitPrice
+) {}

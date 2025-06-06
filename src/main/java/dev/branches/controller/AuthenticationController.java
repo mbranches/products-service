@@ -4,6 +4,7 @@ import dev.branches.dto.LoginPostRequest;
 import dev.branches.dto.LoginPostResponse;
 import dev.branches.dto.RegisterPostRequest;
 import dev.branches.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,14 +20,14 @@ public class AuthenticationController {
     private final UserService service;
 
     @PostMapping("/login")
-    public ResponseEntity<LoginPostResponse> login(@RequestBody LoginPostRequest request) {
+    public ResponseEntity<LoginPostResponse> login(@Valid @RequestBody LoginPostRequest request) {
         LoginPostResponse response = service.login(request);
 
         return ResponseEntity.ok(response);
     }
 
     @PostMapping("/register")
-    public ResponseEntity<Void> register(@RequestBody RegisterPostRequest request) {
+    public ResponseEntity<Void> register(@Valid @RequestBody RegisterPostRequest request) {
         service.registerUser(request);
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
