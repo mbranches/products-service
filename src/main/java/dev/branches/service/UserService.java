@@ -43,6 +43,8 @@ public class UserService {
 
         User userToSave = new User();
         userToSave.setLogin(request.login());
+        userToSave.setFirstName(request.firstName());
+        userToSave.setLastName(request.lastName());
         userToSave.setPassword(passwordEncoder.encode(request.password()));
 
         UserRole userRole = UserRole.builder().user(userToSave).role(basicRole).build();
@@ -59,6 +61,8 @@ public class UserService {
         List<Role> roles = request.roles().stream().map(roleService::findByName).toList();
 
         User user = new User();
+        user.setFirstName(request.firstName());
+        user.setLastName(request.lastName());
         user.setLogin(login);
         user.setPassword(passwordEncoder.encode(request.password()));
         List<UserRole> userRoles = roles.stream().map(role -> UserRole.builder().user(user).role(role).build()).toList();
