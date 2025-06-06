@@ -27,6 +27,8 @@ public class AdminUserConfig implements CommandLineRunner {
         if (repository.findByLogin("admin").isPresent()) return;
 
         User user = new User();
+        user.setFirstName("admin");
+        user.setLastName("admin");
         user.setLogin("admin");
         user.setPassword(passwordEncoder.encode("admin"));
 
