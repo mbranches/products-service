@@ -19,9 +19,7 @@ public class ProductService {
     public List<ProductGetResponse> findAll() {
         List<Product> products = repository.findAll();
 
-        return products.stream()
-                .map(ProductGetResponse::of)
-                .toList();
+        return ProductGetResponse.productGetResponseListOf(products);
     }
 
     public Product findByIdOrThrowsNotFoundException(Long id) {
