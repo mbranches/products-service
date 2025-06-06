@@ -26,10 +26,10 @@
     - Cadastro de Vendas: Apenas usuários com a role `ADMIN` têm permissão para cadastrar vendas.
     - Listagem de Vendas:
         - Todas as Vendas: Usuários com role mínima de `MANAGER` podem listar todas as vendas do sistema.
-        - Minhas compras: Qualquer usuário autenticado (`BASIC`, `MANAGER`, `ADMIN`) pode listar suas próprias compras.
+        - Minhas vendas: Qualquer usuário autenticado (`BASIC`, `MANAGER`, `ADMIN`) pode listar suas próprias vendas.
     - Detalhes de Vendas:
         - Detalhes de Qualquer Venda: Usuários com as roles `ADMIN` ou `MANAGER` podem visualizar os detalhes de qualquer venda.
-        - Detalhes das Próprias Compras: Qualquer usuário autenticado (`BASIC`, `MANAGER`, `ADMIN`) pode consultar os detalhes de suas próprias compras.
+        - Detalhes das Próprias Vendas: Qualquer usuário autenticado (`BASIC`, `MANAGER`, `ADMIN`) pode consultar os detalhes de suas próprias vendas.
 
 > 🔐 Usuário padrão: Ao inicializar a aplicação é adicionado um usuário ADMIN padrão com:
 > - Login: admin
@@ -300,7 +300,7 @@ Authorization: Bearer {seu-token-ADMIN}
 ]
 ```
 
-### Listagem de Vendas (Usuário Autenticado - Minhas Compras)
+### Listagem de Vendas (Usuário Autenticado - Minhas Vendas)
 
 **Requisição:**
 ```http
