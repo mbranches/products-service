@@ -14,22 +14,22 @@
 ## ⚙️ Funcionalidades
 
 * ✅ **Sistema de Autenticação e Autorização Robusto**: Implementado com **Spring Security** e **JWT** para controle de acesso baseado em roles.
-    - Hierarquia de Roles: As roles seguem uma hierarquia de privilégios: `ADMIN` $\rightarrow$ `MANAGER` $\rightarrow$ `BASIC`. Um usuário com uma role superior herda todas as permissões das roles inferiores.
+    - Hierarquia de Roles: As roles seguem uma hierarquia de privilégios: `ADMIN` $\rightarrow$ `MANAGER` $\rightarrow$ `CUSTOMER`. Um usuário com uma role superior herda todas as permissões das roles inferiores.
 
 * 👥 Gerenciamento de Usuários:
-    - Registro Público: Qualquer pessoa pode se registrar. Usuários são cadastrados com a role padrão: `BASIC`.
+    - Registro Público: Qualquer pessoa pode se registrar. Usuários são cadastrados com a role padrão: `CUSTOMER`.
     - Autenticação de Usuários: Usuários já registrados podem autenticar-se via login.
-    - Criação por ADMIN: Usuários com a role `ADMIN` podem criar novos usuários com a role desejada (`BASIC`, `MANAGER` ou `ADMIN`).
+    - Criação por ADMIN: Usuários com a role `ADMIN` podem criar novos usuários com a role desejada (`CUSTOMER`, `MANAGER` ou `ADMIN`).
     - Listagem de Usuários: Acesso restrito a usuários com role mínima `MANAGER`.
 
 * 💰 Gerenciamento de Vendas:
     - Cadastro de Vendas: Apenas usuários com a role `ADMIN` têm permissão para cadastrar vendas.
     - Listagem de Vendas:
         - Todas as Vendas: Usuários com role mínima de `MANAGER` podem listar todas as vendas do sistema.
-        - Minhas vendas: Qualquer usuário autenticado (`BASIC`, `MANAGER`, `ADMIN`) pode listar suas próprias vendas.
+        - Minhas vendas: Qualquer usuário autenticado (`CUSTOMER`, `MANAGER`, `ADMIN`) pode listar suas próprias vendas.
     - Detalhes de Vendas:
         - Detalhes de Qualquer Venda: Usuários com as roles `ADMIN` ou `MANAGER` podem visualizar os detalhes de qualquer venda.
-        - Detalhes das Próprias Vendas: Qualquer usuário autenticado (`BASIC`, `MANAGER`, `ADMIN`) pode consultar os detalhes de suas próprias vendas.
+        - Detalhes das Próprias Vendas: Qualquer usuário autenticado (`CUSTOMER`, `MANAGER`, `ADMIN`) pode consultar os detalhes de suas próprias vendas.
 
 > 🔐 Usuário padrão: Ao inicializar a aplicação é adicionado um usuário ADMIN padrão com:
 > - Login: admin
@@ -47,19 +47,19 @@
 
 ## 📚 Endpoints
 
-| Método | Rota                            | Descrição                                  | Permissão                            |
-|:-------|:--------------------------------|:-------------------------------------------|:-------------------------------------|
-| `POST` | `/api/v1/auth/login`            | Autenticação e geração de token            | Pública                              |
-| `POST` | `/api/v1/auth/register`         | Cadastro de novo usuário com role `BASIC`  | Pública                              |
-| `POST` | `/api/v1/users`                 | Cadastrar novo usuário                     | `ADMIN`                              |
-| `GET`  | `/api/v1/users`                 | Listar todos os usuários                   | `MANAGER` (e `ADMIN` por hierarquia) |
-| `GET`  | `/api/v1/products`              | Listar todos os produtos                   | Autenticado                          |
-| `POST` | `/api/v1/products`              | Cadastrar novo produto                     | `ADMIN`                              |
-| `GET`  | `/api/v1/sales`                 | Listar todas as vendas do sistema          | `ADMIN` (e `MANAGER` por hierarquia) |
-| `GET`  | `/api/v1/sales/{id}/details`    | Obter detalhes de qualquer venda por ID    | `ADMIN` (e `MANAGER` por hierarquia) |
-| `GET`  | `/api/v1/sales/me`              | Listar vendas do usuário autenticado       | Autenticado                          |
-| `GET`  | `/api/v1/sales/me/{id}/details` | Obter detalhes de sua própria venda por ID | Autenticado                          |
-| `POST` | `/api/v1/sales`                 | Cadastrar nova venda                       | `ADMIN`                              |
+| Método | Rota                            | Descrição                                    | Permissão                            |
+|:-------|:--------------------------------|:---------------------------------------------|:-------------------------------------|
+| `POST` | `/api/v1/auth/login`            | Autenticação e geração de token              | Pública                              |
+| `POST` | `/api/v1/auth/register`         | Cadastro de novo usuário com role `CUSTOMER` | Pública                              |
+| `POST` | `/api/v1/users`                 | Cadastrar novo usuário                       | `ADMIN`                              |
+| `GET`  | `/api/v1/users`                 | Listar todos os usuários                     | `MANAGER` (e `ADMIN` por hierarquia) |
+| `GET`  | `/api/v1/products`              | Listar todos os produtos                     | Autenticado                          |
+| `POST` | `/api/v1/products`              | Cadastrar novo produto                       | `ADMIN`                              |
+| `GET`  | `/api/v1/sales`                 | Listar todas as vendas do sistema            | `ADMIN` (e `MANAGER` por hierarquia) |
+| `GET`  | `/api/v1/sales/{id}/details`    | Obter detalhes de qualquer venda por ID      | `ADMIN` (e `MANAGER` por hierarquia) |
+| `GET`  | `/api/v1/sales/me`              | Listar vendas do usuário autenticado         | Autenticado                          |
+| `GET`  | `/api/v1/sales/me/{id}/details` | Obter detalhes de sua própria venda por ID   | Autenticado                          |
+| `POST` | `/api/v1/sales`                 | Cadastrar nova venda                         | `ADMIN`                              |
 
 ## 🧪 Exemplos de Uso
 
@@ -254,7 +254,7 @@ Content-Type: application/json
 ```http
 {
   "id": 1,
-  "user": {
+  "customer": {
     "id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
     "firstName": "Marcus",
     "lastName": "Branches"
@@ -290,7 +290,7 @@ Authorization: Bearer {seu-token-ADMIN}
 [
   {
     "id": 1,
-    "user": {
+    "customer": {
       "id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
       "firstName": "Marcus", 
       "lastName": "Branches"
@@ -299,7 +299,7 @@ Authorization: Bearer {seu-token-ADMIN}
   },
   {
     "id": 2,
-    "user": {
+    "customer": {
       "id": "b1c2d3e4-f5a6-7890-1234-567890abcdef",
       "firstName": "Lucas",
       "lastName": "Prado"
@@ -322,7 +322,7 @@ Authorization: Bearer {seu-token-AUTENTICADO}
 [
   {
     "id": 2,
-    "user": {
+    "customer": {
       "id": "b1c2d3e4-f5a6-7890-1234-567890abcdef",
       "firstName": "Lucas",
       "lastName": "Prado"
@@ -344,7 +344,7 @@ Authorization: Bearer {seu-token-ADMIN-OU-MANAGER}
 ```http
 {
   "id": 1,
-  "user": {
+  "customer": {
     "id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
     "firstName": "Marcus",
     "lastName": "Branches"
@@ -372,14 +372,14 @@ Authorization: Bearer {seu-token-ADMIN-OU-MANAGER}
 **Requisição:**
 ```http
 GET /api/v1/sales/me/2/details
-Authorization: Bearer {seu-token-BASIC-OU-MANAGER}
+Authorization: Bearer {seu-token-CUSTOMER-OU-MANAGER}
 ```
 
 **Resposta Esperada:**
 ```http
 {
   "id": 2,
-  "user": {
+  "customer": {
     "id": "b1c2d3e4-f5a6-7890-1234-567890abcdef",
     "firstName": "Lucas",
     "lastName": "Prado"
