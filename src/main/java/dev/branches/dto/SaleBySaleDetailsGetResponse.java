@@ -5,7 +5,7 @@ import dev.branches.model.SaleProduct;
 
 import java.util.List;
 
-public record SaleBySaleDetailsGetResponse(Long id, UserBySaleGetResponse user, List<SaleProductBySaleDetailsGetResponse> products, Double totalValue) {
+public record SaleBySaleDetailsGetResponse(Long id, UserBySaleGetResponse customer, List<SaleProductBySaleDetailsGetResponse> products, Double totalValue) {
     public static SaleBySaleDetailsGetResponse of(Sale sale, List<SaleProduct> saleProductList) {
         UserBySaleGetResponse user = UserBySaleGetResponse.of(sale.getUser());
 
