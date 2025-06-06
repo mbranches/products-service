@@ -28,17 +28,13 @@ public class SaleService {
     public List<SaleGetResponse> findAll() {
         List<Sale> sales = repository.findAll();
 
-        return sales.stream()
-                .map(SaleGetResponse::of)
-                .toList();
+        return SaleGetResponse.saleGetResponseListOf(sales);
     }
 
     public List<SaleGetResponse> findAllByUser(User user) {
         List<Sale> sales = repository.findAllByUser(user);
 
-        return sales.stream()
-                .map(SaleGetResponse::of)
-                .toList();
+        return SaleGetResponse.saleGetResponseListOf(sales);
     }
 
     public SaleBySaleDetailsGetResponse findSaleDetailsById(Long id) {
