@@ -240,7 +240,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"login\": \"manager\",\r\n    \"password\": \"senhaMuito_Segura123123\",\r\n    \"roles\": [\r\n        \"MANAGER\"\r\n    ]\r\n}",
+							"raw": "{\r\n    \"firstName\": \"Michael\",\r\n    \"lastName\": \"Souza\",\r\n    \"login\": \"manager\",\r\n    \"password\": \"senhaMuito_Segura123123\",\r\n    \"roles\": [\r\n        \"MANAGER\"\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
