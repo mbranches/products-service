@@ -39,7 +39,7 @@ public class UserService {
     public void registerUser(RegisterPostRequest request) {
         if (repository.findByLogin(request.login()).isPresent()) throw new BadRequestException("Login is already registered");
 
-        Role basicRole = roleService.findByName(RoleType.BASIC);
+        Role basicRole = roleService.findByName(RoleType.CUSTOMER);
 
         User userToSave = new User();
         userToSave.setLogin(request.login());
