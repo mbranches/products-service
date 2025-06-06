@@ -4,6 +4,7 @@ import dev.branches.dto.ProductGetResponse;
 import dev.branches.dto.ProductPostRequest;
 import dev.branches.dto.ProductPostResponse;
 import dev.branches.service.ProductService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<ProductPostResponse> create(@RequestBody ProductPostRequest postRequest) {
+    public ResponseEntity<ProductPostResponse> create(@Valid @RequestBody ProductPostRequest postRequest) {
         ProductPostResponse response = service.create(postRequest);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);

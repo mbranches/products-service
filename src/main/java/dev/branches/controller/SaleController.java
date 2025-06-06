@@ -6,6 +6,7 @@ import dev.branches.dto.SalePostRequest;
 import dev.branches.dto.SalePostResponse;
 import dev.branches.model.User;
 import dev.branches.service.SaleService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -53,7 +54,7 @@ public class SaleController {
     }
 
     @PostMapping
-    public ResponseEntity<SalePostResponse> create(Authentication authentication, @RequestBody SalePostRequest request) {
+    public ResponseEntity<SalePostResponse> create(Authentication authentication, @Valid @RequestBody SalePostRequest request) {
         User user = (User) authentication.getPrincipal();
 
         SalePostResponse response = service.create(user, request);

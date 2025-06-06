@@ -4,6 +4,7 @@ import dev.branches.dto.UserGetResponse;
 import dev.branches.dto.UserPostRequest;
 import dev.branches.dto.UserPostResponse;
 import dev.branches.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserPostResponse> createUser(@RequestBody UserPostRequest request) {
+    public ResponseEntity<UserPostResponse> createUser(@Valid @RequestBody UserPostRequest request) {
         UserPostResponse response = service.createUser(request);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
