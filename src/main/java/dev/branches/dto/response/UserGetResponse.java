@@ -11,4 +11,8 @@ public record UserGetResponse(String id, String name, String lastName, String lo
 
         return new UserGetResponse(user.getId(), user.getFirstName(), user.getLastName(), user.getLogin(), user.getPassword(), roles);
     }
+
+    public static List<UserGetResponse> userGetResponseListOf(List<User> userList) {
+        return userList.stream().map(UserGetResponse::of).toList();
+    }
 }

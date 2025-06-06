@@ -32,6 +32,12 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final RoleService roleService;
 
+    public List<UserGetResponse> findAll() {
+        List<User> users = repository.findAll();
+
+        return UserGetResponse.userGetResponseListOf(users);
+    }
+
     public LoginPostResponse login(LoginPostRequest request) {
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(request.login(), request.password());
 
@@ -77,16 +83,5 @@ public class UserService {
         User savedUser = repository.save(user);
 
         return UserPostResponse.of(savedUser);
-    }
-
-    public List<UserGetResponse> findAll() {
-        List<User> users = repository.findAll();
-
-        return users.stream().map(UserGetResponse::of).toList();
-    }
-
-    public User findByLoginOrThrowsNotFoundException(String login) {
-        return repository.findByLogin(login)
-                .orElseThrow(() -> new NotFoundException("User with login '%s' not found".formatted(login)));
     }
 }
