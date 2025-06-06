@@ -44,5 +44,5 @@ CREATE TABLE IF NOT EXISTS sale_product (
 );
 
 INSERT IGNORE INTO role(id, name, description) VALUES (1, 'ADMIN', 'has all system accesses');
-INSERT IGNORE INTO role(id, name, description) VALUES (2, 'BASIC', 'has limited system accesses');
+INSERT IGNORE INTO role(id, name, description) VALUES (2, 'CUSTOMER', 'has limited system accesses');
 INSERT IGNORE INTO role(id, name, description) VALUES (3, 'MANAGER', 'has limited access to administrative and management functionalities');
