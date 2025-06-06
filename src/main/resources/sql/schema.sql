@@ -6,6 +6,8 @@ CREATE TABLE IF NOT EXISTS role (
 
 CREATE TABLE IF NOT EXISTS user (
     id varchar(36) PRIMARY KEY,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
     login varchar(50) NOT NULL UNIQUE,
     password varchar(100) NOT NULL
 );
@@ -36,7 +38,7 @@ CREATE TABLE IF NOT EXISTS sale_product (
     sale_id bigint NOT NULL,
     product_id bigint NOT NULL,
     quantity int NOT NULL,
-    total_value decimal(10, 2),
+    total_value decimal(10, 2) NOT NULL,
     FOREIGN KEY (sale_id) REFERENCES sale(id),
     FOREIGN KEY (product_id) REFERENCES product(id)
 );
