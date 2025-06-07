@@ -5,6 +5,7 @@ import dev.branches.dto.response.SaleBySaleDetailsGetResponse;
 import dev.branches.dto.response.SaleGetResponse;
 import dev.branches.dto.response.SalePostResponse;
 import dev.branches.exception.NotFoundException;
+import dev.branches.mapper.SaleMapper;
 import dev.branches.model.Product;
 import dev.branches.model.Sale;
 import dev.branches.model.SaleProduct;
@@ -24,17 +25,18 @@ public class SaleService {
     private final SaleRepository repository;
     private final SaleProductService saleProductService;
     private final ProductService productService;
+    private final SaleMapper mapper;
 
     public List<SaleGetResponse> findAll() {
         List<Sale> sales = repository.findAll();
 
-        return SaleGetResponse.saleGetResponseListOf(sales);
+        return mapper.toSaleGetResponseList(sales);
     }
 
     public List<SaleGetResponse> findAllByUser(User user) {
         List<Sale> sales = repository.findAllByUser(user);
 
-        return SaleGetResponse.saleGetResponseListOf(sales);
+        return mapper.toSaleGetResponseList(sales);
     }
 
     public SaleBySaleDetailsGetResponse findSaleDetailsById(Long id) {
@@ -42,7 +44,7 @@ public class SaleService {
 
         List<SaleProduct> products = saleProductService.findAllBySaleId(sale.getId());
 
-        return SaleBySaleDetailsGetResponse.of(sale, products);
+        return mapper.toSaleBySaleDetailsGetResponse(sale, products);
     }
 
     public SaleBySaleDetailsGetResponse findMySaleDetailsById(User user, Long id) {
@@ -52,7 +54,7 @@ public class SaleService {
 
         List<SaleProduct> products = saleProductService.findAllBySaleId(sale.getId());
 
-        return SaleBySaleDetailsGetResponse.of(sale, products);
+        return mapper.toSaleBySaleDetailsGetResponse(sale, products);
     }
 
     public Sale findByIdOrThrowsNotFoundException(Long id) {
@@ -85,6 +87,6 @@ public class SaleService {
 
         List<SaleProduct> savedSaleProducts = saleProductService.saveAll(saleProductList);
 
-        return SalePostResponse.of(savedSale, savedSaleProducts);
+        return mapper.toSalePostResponse(savedSale, savedSaleProducts);
     }
 }
