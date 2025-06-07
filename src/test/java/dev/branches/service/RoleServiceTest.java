@@ -4,7 +4,6 @@ import dev.branches.model.Role;
 import dev.branches.model.Role.RoleType;
 import dev.branches.repository.RoleRepository;
 import dev.branches.utils.RoleUtils;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.BDDMockito;
