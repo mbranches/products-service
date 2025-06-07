@@ -1,6 +1,5 @@
 package dev.branches.model;
 
-import dev.branches.dto.request.ProductPostRequest;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,11 +17,4 @@ public class Product {
     private String name;
     @Column(nullable = false, columnDefinition = "DECIMAL")
     private Double unitPrice;
-
-    public static Product of(ProductPostRequest postRequest) {
-        return Product.builder()
-                .name(postRequest.name())
-                .unitPrice(postRequest.unitPrice())
-                .build();
-    }
 }

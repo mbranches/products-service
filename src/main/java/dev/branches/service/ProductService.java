@@ -4,6 +4,7 @@ import dev.branches.dto.response.ProductGetResponse;
 import dev.branches.dto.request.ProductPostRequest;
 import dev.branches.dto.response.ProductPostResponse;
 import dev.branches.exception.NotFoundException;
+import dev.branches.mapper.ProductMapper;
 import dev.branches.model.Product;
 import dev.branches.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,11 +16,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductService {
     private final ProductRepository repository;
+    private final ProductMapper mapper;
 
     public List<ProductGetResponse> findAll() {
         List<Product> products = repository.findAll();
 
-        return ProductGetResponse.productGetResponseListOf(products);
+        return mapper.toProductGetResponseList(products);
     }
 
     public Product findByIdOrThrowsNotFoundException(Long id) {
@@ -28,10 +30,10 @@ public class ProductService {
     }
 
     public ProductPostResponse create(ProductPostRequest postRequest) {
-        Product productToSave = Product.of(postRequest);
+        Product productToSave = mapper.toProduct(postRequest);
 
         Product savedProduct = repository.save(productToSave);
 
-        return ProductPostResponse.of(savedProduct);
+        return mapper.toProductPostResponse(savedProduct);
     }
 }
