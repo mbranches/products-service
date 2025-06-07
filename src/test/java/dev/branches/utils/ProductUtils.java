@@ -12,7 +12,7 @@ public class ProductUtils {
     public static List<Product> newProductList() {
         Product product1 = Product.builder().id(1L).name("Iphone 12").unitPrice(3456.5D).build();
         Product product2 = Product.builder().id(2L).name("Camisa azul PP").unitPrice(67.4D).build();
-        Product product3 = Product.builder().id(2L).name("Camisa azul PP").unitPrice(67.4D).build();
+        Product product3 = Product.builder().id(2L).name("Notebook Asus").unitPrice(6500D).build();
 
         return new ArrayList<>(List.of(product1, product2, product3));
     }
