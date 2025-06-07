@@ -1,4 +1,4 @@
-package dev.branches.config;
+package dev.branches.infra.security;
 
 import dev.branches.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

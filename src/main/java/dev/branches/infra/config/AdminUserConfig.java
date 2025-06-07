@@ -1,4 +1,4 @@
-package dev.branches.config;
+package dev.branches.infra.config;
 
 import dev.branches.model.Role;
 import dev.branches.model.Role.RoleType;

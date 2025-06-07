@@ -1,4 +1,4 @@
-package dev.branches.config;
+package dev.branches.infra.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
