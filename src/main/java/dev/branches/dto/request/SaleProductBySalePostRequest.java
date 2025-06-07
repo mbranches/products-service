@@ -1,7 +1,9 @@
 package dev.branches.dto.request;
 
 import jakarta.validation.constraints.NotNull;
+import lombok.With;
 
+@With
 public record SaleProductBySalePostRequest(
         @NotNull(message = "The field 'productId' is required")
         Long productId,
