@@ -1,6 +1,7 @@
 package dev.branches.utils;
 
 import dev.branches.dto.response.UserBySaleGetResponse;
+import dev.branches.dto.response.UserBySalePostResponse;
 import dev.branches.model.Role;
 import dev.branches.model.User;
 import dev.branches.model.UserRole;
@@ -32,5 +33,11 @@ public class UserUtils {
         User user = newUserList().getFirst();
 
         return new UserBySaleGetResponse(user.getId(), user.getFirstName(), user.getLastName());
+    }
+
+    public static UserBySalePostResponse newUserBySalePostResponse() {
+        User user = newUserList().getFirst();
+
+        return new UserBySalePostResponse(user.getId(), user.getFirstName(), user.getLastName());
     }
 }
