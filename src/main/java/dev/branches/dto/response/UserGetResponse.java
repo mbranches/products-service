@@ -5,7 +5,7 @@ import dev.branches.model.User;
 
 import java.util.List;
 
-public record UserGetResponse(String id, String name, String lastName, String login, String encryptedPassword, List<RoleType> roles) {
+public record UserGetResponse(String id, String firstName, String lastName, String login, String encryptedPassword, List<RoleType> roles) {
     public static UserGetResponse of(User user) {
         List<RoleType> roles = user.getRoles().stream().map(userRole -> userRole.getRole().getName()).toList();
 
