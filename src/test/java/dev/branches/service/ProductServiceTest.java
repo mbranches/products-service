@@ -74,14 +74,13 @@ class ProductServiceTest {
     @DisplayName("findByIdOrThrowsNotFoundException throws NotFoundException when the given id is not found")
     @Order(3)
     void findByIdOrThrowsNotFoundException_ThrowsNotFoundException_WhenTheGivenIdIsNotFound() {
-        Product productToBeFound = productList.getFirst();
-        Long idToSearch = productToBeFound.getId();
+        Long randomId = 999L;
 
-        BDDMockito.when(repository.findById(idToSearch)).thenReturn(Optional.empty());
+        BDDMockito.when(repository.findById(randomId)).thenReturn(Optional.empty());
 
-        assertThatThrownBy(() -> service.findByIdOrThrowsNotFoundException(idToSearch))
+        assertThatThrownBy(() -> service.findByIdOrThrowsNotFoundException(randomId))
                 .isInstanceOf(NotFoundException.class)
-                .hasMessageContaining("Product with id '%s' not found".formatted(idToSearch));
+                .hasMessageContaining("Product with id '%s' not found".formatted(randomId));
     }
 
     @Test
