@@ -5,6 +5,7 @@ import dev.branches.dto.response.ProductGetResponse;
 import dev.branches.dto.response.ProductPostResponse;
 import dev.branches.model.Product;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 import org.springframework.context.annotation.Primary;
 
@@ -17,5 +18,6 @@ public interface ProductMapper {
 
     ProductPostResponse toProductPostResponse(Product product);
 
+    @Mapping(target = "id", ignore = true)
     Product toProduct(ProductPostRequest postRequest);
 }
