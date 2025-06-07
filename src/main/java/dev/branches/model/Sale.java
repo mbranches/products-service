@@ -3,12 +3,13 @@ package dev.branches.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Entity
+@With
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
+@Entity
 public class Sale {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
