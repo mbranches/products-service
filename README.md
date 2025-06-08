@@ -154,6 +154,8 @@ Authorization: Bearer {seu-token-MANAGER-OU-ADMIN}
 [
   {
     "id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "firstName": "admin",
+    "lastName": "admin",
     "login": "admin",
     "encryptedPassword": "$2a$10$gPFpnoiKPmxGLuo2LqW8oeFygTP//dLzZX2qjKWvgzqwHIa8EqyJy",
     "roles": [
@@ -165,6 +167,8 @@ Authorization: Bearer {seu-token-MANAGER-OU-ADMIN}
   },
   {
     "id": "f7f46b8d-28ec-41a3-a885-bdd7a6a3aec0",
+    "firstName":  "Mário",
+    "lastName": "Silva",
     "login": "manager",
     "encryptedPassword": "$2a$10$gPFpnoiKPmxGLuo2LqW8oeFygTP//dLzZX2qjKWvgzqwHIa8EqyJy",
     "roles": [
