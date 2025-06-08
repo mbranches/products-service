@@ -1,7 +1,9 @@
 package dev.branches.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
+import lombok.With;
 
+@With
 public record RegisterPostRequest(
         @NotBlank(message = "The field 'firstName' is required")
         String firstName,

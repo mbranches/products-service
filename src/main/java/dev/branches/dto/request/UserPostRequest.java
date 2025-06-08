@@ -3,9 +3,11 @@ package dev.branches.dto.request;
 import dev.branches.model.Role.RoleType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.With;
 
 import java.util.List;
 
+@With
 public record UserPostRequest(
         @NotBlank(message = "The field 'firstName' is required")
         String firstName,
