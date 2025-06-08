@@ -8,6 +8,7 @@ import dev.branches.dto.response.LoginPostResponse;
 import dev.branches.dto.response.UserGetResponse;
 import dev.branches.dto.response.UserPostResponse;
 import dev.branches.exception.BadRequestException;
+import dev.branches.mapper.UserMapper;
 import dev.branches.model.Role;
 import dev.branches.model.Role.RoleType;
 import dev.branches.model.User;
@@ -27,6 +28,7 @@ import java.util.List;
 public class UserService {
     private final AuthenticationManager authenticationManager;
     private final UserRepository repository;
+    private final UserMapper mapper;
     private final JwtTokenService jwtTokenService;
     private final PasswordEncoder passwordEncoder;
     private final RoleService roleService;
@@ -34,7 +36,7 @@ public class UserService {
     public List<UserGetResponse> findAll() {
         List<User> users = repository.findAll();
 
-        return UserGetResponse.userGetResponseListOf(users);
+        return mapper.toUserGetResponseList(users);
     }
 
     public LoginPostResponse login(LoginPostRequest request) {
@@ -81,6 +83,6 @@ public class UserService {
 
         User savedUser = repository.save(user);
 
-        return UserPostResponse.of(savedUser);
+        return mapper.toUserPostResponse(savedUser);
     }
 }
