@@ -6,7 +6,8 @@
 
 - [Funcionalidades](#-funcionalidades)
 - [Tecnologias Utilizadas](#-tecnologias-utilizadas)
-- [Endpoints](#-endpoints)
+- [Banco de dados](#-banco-de-dados)
+- [Documentação](#-documentação-da-api)
 - [Exemplos de uso](#-exemplos-de-uso)
 - [Como Rodar a Aplicação](#-como-rodar-a-aplicação)
 - [Testando a API com Postman](#-testando-a-api-com-postman)
@@ -39,27 +40,39 @@
 
 - **Spring Boot** – Framework principal para criação da API REST.
 - **Spring Security** – Implementação da autenticação e autorização com JWT.
+- **Spring Doc** - Utilizado para documentar a API.
 - **Spring Data JPA** – Integração com banco de dados usando repositórios e consultas com JPA.
 - **Hibernate** – Implementação ORM (mapeamento objeto-relacional) apenas para a validação do Schema.
 - **MySQL** – Banco de dados relacional utilizado na aplicação.
 - **Docker** – Containerização do banco de dados.
 - **Maven** – Gerenciador de dependências e automação de build.
 
-## 📚 Endpoints
+## 💾 Banco de Dados
 
-| Método | Rota                            | Descrição                                    | Permissão                            |
-|:-------|:--------------------------------|:---------------------------------------------|:-------------------------------------|
-| `POST` | `/api/v1/auth/login`            | Autenticação e geração de token              | Pública                              |
-| `POST` | `/api/v1/auth/register`         | Cadastro de novo usuário com role `CUSTOMER` | Pública                              |
-| `POST` | `/api/v1/users`                 | Cadastrar novo usuário                       | `ADMIN`                              |
-| `GET`  | `/api/v1/users`                 | Listar todos os usuários                     | `MANAGER` (e `ADMIN` por hierarquia) |
-| `GET`  | `/api/v1/products`              | Listar todos os produtos                     | Autenticado                          |
-| `POST` | `/api/v1/products`              | Cadastrar novo produto                       | `ADMIN`                              |
-| `GET`  | `/api/v1/sales`                 | Listar todas as vendas do sistema            | `ADMIN` (e `MANAGER` por hierarquia) |
-| `GET`  | `/api/v1/sales/{id}/details`    | Obter detalhes de qualquer venda por ID      | `ADMIN` (e `MANAGER` por hierarquia) |
-| `GET`  | `/api/v1/sales/me`              | Listar vendas do usuário autenticado         | Autenticado                          |
-| `GET`  | `/api/v1/sales/me/{id}/details` | Obter detalhes de sua própria venda por ID   | Autenticado                          |
-| `POST` | `/api/v1/sales`                 | Cadastrar nova venda                         | `ADMIN`                              |
+### 📐 Estrutura do Banco
+- Abaixo está o diagrama que representa a estrutura do banco de dados utilizada no projeto:
+
+<div style="text-align: center;">
+  <img src="assets/schema.png" width="700"/>
+</div>
+
+## 📄 SQL
+- A aplicação, ao inicializar, configura o banco de dados através do arquivo sql, presente em `src/main/resources/sql/schema.sql`.
+- Esse script realiza a criação das tabelas e insere as roles padrão na tabela `role`, sendo elas:
+  - `ADMIN`
+  - `CUSTOMER`
+  - `MANAGER`
+
+
+## 📚 Documentação da API
+
+A API possui documentação completa, exibida via **Swagger UI**, permitindo a visualização e teste de todas as rotas disponíveis.
+
+🔗 Acesse em: `http://localhost:8080/swagger-ui/index.html`
+
+<div style="text-align: center;">
+    <img src="assets/swagger-ui.png" width="720" alt="Swagger UI da aplicação" />
+</div>
 
 ## 🧪 Exemplos de Uso
 
@@ -441,6 +454,25 @@ docker-compose up -d
 ```
 mvn spring-boot:run
 ```
+
+## ✅ Testando a API com Swagger
+
+1. **Acessando a Documentação**
+- Com a API rodando, vá até a url `http://localhost:8080/swagger-ui/index.html`
+
+2. **Autenticação**
+- Vá até a seção `Auth`
+- Realize a autenticação utilizando o endpoint /login com suas credenciais válidas (login e senha).
+- O token JWT será retornado na resposta.
+
+3. **Configuração do Token JWT**
+- Clique no botão "Authorize" no topo da interface.
+- No campo "value", insira seu token JWT retornado no momento do login, e clique em "Authorize".
+
+4. **Explorando os Endpoint**
+- Os endpoints estão organizados por categorias como auth, products, sales e users.
+- Clique em cada categoria para visualizar os métodos disponíveis (GET, POST, etc.).
+- Clique em "Try it out" para testar e preencha os campos de entrada (caso necessário).
 
 ## 📂 Testando a API com Postman
 
