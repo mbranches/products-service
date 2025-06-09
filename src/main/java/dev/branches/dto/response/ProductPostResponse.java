@@ -1,3 +1,12 @@
 package dev.branches.dto.response;
 
-public record ProductPostResponse(Long id, String name, Double unitPrice) {}
+import io.swagger.v3.oas.annotations.media.Schema;
+
+public record ProductPostResponse(
+        @Schema(description = "product id saved in database", example = "1")
+        Long id,
+        @Schema(description = "product name", example = "Monitor UltraWide LG")
+        String name,
+        @Schema(description = "product unit price", example = "1800.00")
+        Double unitPrice
+) {}
