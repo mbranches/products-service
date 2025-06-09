@@ -3,6 +3,7 @@ package dev.branches.controller;
 import dev.branches.dto.response.ProductGetResponse;
 import dev.branches.dto.request.ProductPostRequest;
 import dev.branches.dto.response.ProductPostResponse;
+import dev.branches.exception.ArgumentNotValidMessageError;
 import dev.branches.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -69,6 +70,13 @@ public class ProductController {
                             description = "the requesting user does not have the ADMIN role",
                             responseCode = "403",
                             content = @Content
+                    ),
+                    @ApiResponse(
+                            description = "required field not given",
+                            responseCode = "400",
+                            content = @Content(
+                                    schema = @Schema(implementation = ArgumentNotValidMessageError.class)
+                            )
                     )
             }
     )
