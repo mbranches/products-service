@@ -461,18 +461,18 @@ mvn spring-boot:run
 - Com a API rodando, vá até a url `http://localhost:8080/swagger-ui/index.html`
 
 2. **Autenticação**
-- Vá até a seção `Auth`
-- Realize a autenticação utilizando o endpoint /login com suas credenciais válidas (login e senha).
-- O token JWT será retornado na resposta.
+   - Vá até a seção `Auth`
+   - Realize a autenticação utilizando o endpoint /login com suas credenciais válidas (login e senha).
+   - O token JWT será retornado na resposta.
 
 3. **Configuração do Token JWT**
-- Clique no botão "Authorize" no topo da interface.
+   - Clique no botão "Authorize" no topo da interface.
 - No campo "value", insira seu token JWT retornado no momento do login, e clique em "Authorize".
 
 4. **Explorando os Endpoint**
-- Os endpoints estão organizados por categorias como auth, products, sales e users.
+   - Os endpoints estão organizados por categorias como auth, products, sales e users.
 - Clique em cada categoria para visualizar os métodos disponíveis (GET, POST, etc.).
-- Clique em "Try it out" para testar e preencha os campos de entrada (caso necessário).
+    - Clique em "Try it out" para testar e preencha os campos de entrada (caso necessário).
 
 ## 📂 Testando a API com Postman
 
