@@ -30,7 +30,7 @@ public class UserController {
     private final UserService service;
 
     @Operation(
-            summary = "list all users",
+            summary = "List all users",
             responses = {
                     @ApiResponse(
                             description = "list all user successfully",
@@ -58,7 +58,7 @@ public class UserController {
             summary = "Create user",
             responses = {
                     @ApiResponse(
-                            description = "User saved successfully",
+                            description = "user saved successfully",
                             responseCode = "201",
                             content = @Content(schema = @Schema(implementation = UserPostResponse.class))
                     ),
@@ -66,17 +66,15 @@ public class UserController {
                             description = "Given login already registered",
                             responseCode = "400",
                             content = @Content(
-                                    schema = @Schema(implementation = DefaultMessageError.class),
-                                    examples = {
-                                        @ExampleObject(
-                                                value = """
-                                                {
-                                                  "status": 400,
-                                                  "message": "Login is already registered"
-                                                }
-                                                """
-                                        )
-                                    }
+                                    schema = @Schema(
+                                            implementation = DefaultMessageError.class,
+                                            example = """
+                                                    {
+                                                        "status": 400,
+                                                        "message": "Login is already registered"
+                                                    }
+                                                    """
+                                    )
                             )
                     ),
                     @ApiResponse(
