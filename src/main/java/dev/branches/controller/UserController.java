@@ -9,6 +9,7 @@ import dev.branches.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -62,27 +63,32 @@ public class UserController {
                             content = @Content(schema = @Schema(implementation = UserPostResponse.class))
                     ),
                     @ApiResponse(
-                            description = "given login already registered",
+                            description = "given login already registered or required field not given",
                             responseCode = "400",
                             content = @Content(
-                                    schema = @Schema(
-                                            implementation = DefaultMessageError.class,
-                                            example = """
-                                                    {
-                                                        "status": 400,
-                                                        "message": "Login is already registered"
-                                                    }
-                                                    """
-                                    )
-                            )
-                    ),
-                    @ApiResponse(
-                            description = "required field not given",
-                            responseCode = "400",
-                            content = @Content(
-                                    schema = @Schema(
-                                            implementation = ArgumentNotValidMessageError.class
-                                    )
+                                    examples = {
+                                            @ExampleObject(
+                                                    name = "the given login belongs to another user",
+                                                    summary = "given login already registered",
+                                                    value = """
+                                                            {
+                                                                "status": 400,
+                                                                "message": "Login is already registered"
+                                                            }
+                                                            """
+                                            ),
+                                            @ExampleObject(
+                                                    name = "a required field was not given",
+                                                    summary = "required field not given",
+                                                    value = """
+                                                            {
+                                                                "status": 400,
+                                                                "error": "Bad Request",
+                                                                "message": "The field 'XX' is required"
+                                                            }
+                                                            """
+                                            )
+                                    }
                             )
                     ),
                     @ApiResponse(
