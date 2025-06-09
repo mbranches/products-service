@@ -1,5 +1,20 @@
 package dev.branches.dto.response;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.util.List;
 
-public record UserPostResponse(String id, String firstName, String lastName, String login, String encryptedPassword, List<UserRoleByUserPostResponse> roles) {}
+public record UserPostResponse(
+        @Schema(description = "user id saved in database", example = "fkJn4hTb6uw$#")
+        String id,
+        @Schema(description = "user first name", example = "Marcus")
+        String firstName,
+        @Schema(description = "user last name", example = "Branches")
+        String lastName,
+        @Schema(description = "user login", example = "m.branches9")
+        String login,
+        @Schema(description = "encrypted user password saved in database", example = "encRyPt3dPa5sw0rD")
+        String encryptedPassword,
+        @Schema(description = "user roles")
+        List<UserRoleByUserPostResponse> roles
+) {}
