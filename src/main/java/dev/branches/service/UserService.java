@@ -50,7 +50,7 @@ public class UserService {
 
             return new LoginPostResponse(jwtTokenService.generateKey(user));
         } catch(Exception e) {
-            throw new BadCredentialsException("User or password invalid");
+            throw new BadCredentialsException("Login or password invalid");
         }
     }
 

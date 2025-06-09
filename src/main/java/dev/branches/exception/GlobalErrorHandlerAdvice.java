@@ -29,7 +29,7 @@ public class GlobalErrorHandlerAdvice {
 
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<DefaultMessageError> handlerBadCredentialsException(BadCredentialsException e) {
-        DefaultMessageError error = new DefaultMessageError(HttpStatus.UNAUTHORIZED.value(), "User or password invalid");
+        DefaultMessageError error = new DefaultMessageError(HttpStatus.UNAUTHORIZED.value(), "Login or password invalid");
 
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
     }
