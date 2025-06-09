@@ -53,7 +53,7 @@
 - Abaixo está o diagrama que representa a estrutura do banco de dados utilizada no projeto:
 
 <div style="text-align: center;">
-  <img src="assets/schema.png" width="700"/>
+  <img src="assets/schema.png" width="700" alt="Diagrama do Banco de Dados"/>
 </div>
 
 ## 📄 SQL
@@ -458,7 +458,7 @@ mvn spring-boot:run
 ## ✅ Testando a API com Swagger
 
 1. **Acessando a Documentação**
-- Com a API rodando, vá até a url `http://localhost:8080/swagger-ui/index.html`
+   - Com a API rodando, vá até a url `http://localhost:8080/swagger-ui/index.html`
 
 2. **Autenticação**
    - Vá até a seção `Auth`
@@ -467,12 +467,12 @@ mvn spring-boot:run
 
 3. **Configuração do Token JWT**
    - Clique no botão "Authorize" no topo da interface.
-- No campo "value", insira seu token JWT retornado no momento do login, e clique em "Authorize".
+   - No campo "value", insira seu token JWT retornado no momento do login, e clique em "Authorize".
 
 4. **Explorando os Endpoint**
    - Os endpoints estão organizados por categorias como auth, products, sales e users.
-- Clique em cada categoria para visualizar os métodos disponíveis (GET, POST, etc.).
-    - Clique em "Try it out" para testar e preencha os campos de entrada (caso necessário).
+   - Clique em cada categoria para visualizar os métodos disponíveis (GET, POST, etc.).
+   - Clique em "Try it out" para testar e preencha os campos de entrada (caso necessário).
 
 ## 📂 Testando a API com Postman
 
@@ -481,15 +481,11 @@ mvn spring-boot:run
 1. **Baixar o Arquivo da Collection**:  
    Na pasta `data` do repositório, você encontrará um arquivo chamado `Product_Service.postman_collection`. Esse arquivo contém todas as rotas da API, prontas para serem usadas no **Postman**.
 
----
-
 2. **Importar a Collection**:
    - Abra o **Postman**.
    - Clique em **Import** no canto superior esquerdo da tela.
    - Selecione o arquivo `Product_Service.postman_collection` que você baixou da pasta `data`.
    - Após a importação, todas as rotas estarão disponíveis no **Postman**.
-
----
 
 3. **Consumindo a API**:  
     - Dentro da Collection, vá até a pasta **Auth** e execute a requisição de **Login** para se autenticar.
