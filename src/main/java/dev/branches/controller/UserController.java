@@ -33,7 +33,7 @@ public class UserController {
             summary = "List all users",
             responses = {
                     @ApiResponse(
-                            description = "list all user successfully",
+                            description = "all users listed successfully",
                             responseCode = "200",
                             content = @Content(
                                     array = @ArraySchema(schema = @Schema(implementation = UserGetResponse.class))
@@ -57,7 +57,7 @@ public class UserController {
             summary = "Create user",
             responses = {
                     @ApiResponse(
-                            description = "user saved successfully",
+                            description = "user created successfully",
                             responseCode = "201",
                             content = @Content(schema = @Schema(implementation = UserPostResponse.class))
                     ),
