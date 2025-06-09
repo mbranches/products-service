@@ -16,6 +16,7 @@ import dev.branches.model.UserRole;
 import dev.branches.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -42,11 +43,15 @@ public class UserService {
     public LoginPostResponse login(LoginPostRequest request) {
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(request.login(), request.password());
 
-        Authentication authentication = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
+        try {
+            Authentication authentication = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
 
-        User user = (User) authentication.getPrincipal();
+            User user = (User) authentication.getPrincipal();
 
-        return new LoginPostResponse(jwtTokenService.generateKey(user));
+            return new LoginPostResponse(jwtTokenService.generateKey(user));
+        } catch(Exception e) {
+            throw new BadCredentialsException("User or password invalid");
+        }
     }
 
     public void registerUser(RegisterPostRequest request) {
