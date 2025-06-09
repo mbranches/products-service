@@ -3,12 +3,12 @@ package dev.branches.controller;
 import dev.branches.dto.response.UserGetResponse;
 import dev.branches.dto.request.UserPostRequest;
 import dev.branches.dto.response.UserPostResponse;
+import dev.branches.exception.ArgumentNotValidMessageError;
 import dev.branches.exception.DefaultMessageError;
 import dev.branches.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -46,7 +46,6 @@ public class UserController {
                     )
             }
     )
-
     @GetMapping
     public ResponseEntity<List<UserGetResponse>> findAll() {
         List<UserGetResponse> response = service.findAll();
@@ -63,7 +62,7 @@ public class UserController {
                             content = @Content(schema = @Schema(implementation = UserPostResponse.class))
                     ),
                     @ApiResponse(
-                            description = "Given login already registered",
+                            description = "given login already registered",
                             responseCode = "400",
                             content = @Content(
                                     schema = @Schema(
@@ -74,6 +73,15 @@ public class UserController {
                                                         "message": "Login is already registered"
                                                     }
                                                     """
+                                    )
+                            )
+                    ),
+                    @ApiResponse(
+                            description = "required fields not given",
+                            responseCode = "400",
+                            content = @Content(
+                                    schema = @Schema(
+                                            implementation = ArgumentNotValidMessageError.class
                                     )
                             )
                     ),
