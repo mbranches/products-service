@@ -77,7 +77,7 @@ public class UserController {
                             )
                     ),
                     @ApiResponse(
-                            description = "required fields not given",
+                            description = "required field not given",
                             responseCode = "400",
                             content = @Content(
                                     schema = @Schema(
