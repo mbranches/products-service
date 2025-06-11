@@ -46,7 +46,7 @@ public class ProductControllerIntegrationTest {
                 .apply(springSecurity())
                 .build();
 
-        Product product = ProductUtils.newProductToSave();
+        Product product = Product.builder().name("Mesa com 4 cadeiras").unitPrice(3500D).build();
 
         repository.save(product);
     }
