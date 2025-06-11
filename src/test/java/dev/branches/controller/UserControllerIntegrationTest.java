@@ -28,6 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @IntegrationTest
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class UserControllerIntegrationTest {
     private final String URL = "/api/v1/users";
     private MockMvc mockMvc;

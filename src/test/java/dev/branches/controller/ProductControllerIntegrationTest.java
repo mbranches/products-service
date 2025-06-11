@@ -4,7 +4,6 @@ import dev.branches.config.IntegrationTest;
 import dev.branches.model.Product;
 import dev.branches.repository.ProductRepository;
 import dev.branches.utils.FileUtils;
-import dev.branches.utils.ProductUtils;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -27,9 +26,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest
 @AutoConfigureMockMvc
 @IntegrationTest
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ProductControllerIntegrationTest {
     private final String URL = "/api/v1/products";
     private MockMvc mockMvc;
