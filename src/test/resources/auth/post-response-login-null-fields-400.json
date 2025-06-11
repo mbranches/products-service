@@ -1,0 +1,5 @@
+{
+  "status":400,
+  "error":"Bad Request",
+  "message":"The field 'login' is required, The field 'password' is required"
+}
