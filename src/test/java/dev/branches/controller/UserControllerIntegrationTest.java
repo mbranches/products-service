@@ -2,7 +2,6 @@ package dev.branches.controller;
 
 import dev.branches.config.IntegrationTest;
 import dev.branches.utils.FileUtils;
-import dev.branches.utils.UserUtils;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
