@@ -1,0 +1,9 @@
+{
+  "firstName": "Mateus",
+  "lastName": "Lessa",
+  "login": "mat_lessa",
+  "password": "123",
+  "roles": [
+    "MANAGER"
+  ]
+}
