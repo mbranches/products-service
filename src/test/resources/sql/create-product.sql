@@ -1,0 +1,1 @@
+insert into product(name, unit_price) VALUES ('Mouse Logitech', 320);
