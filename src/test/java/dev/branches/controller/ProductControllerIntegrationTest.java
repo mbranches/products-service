@@ -13,6 +13,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -45,10 +46,6 @@ public class ProductControllerIntegrationTest {
         mockMvc = MockMvcBuilders.webAppContextSetup(context)
                 .apply(springSecurity())
                 .build();
-
-        Product product = Product.builder().name("Mesa com 4 cadeiras").unitPrice(3500D).build();
-
-        repository.save(product);
     }
 
     @AfterEach
@@ -56,6 +53,8 @@ public class ProductControllerIntegrationTest {
         repository.deleteAll();
     }
 
+    @Sql(value = "classpath:sql/create-product.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = "classpath:sql/clear-product.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @WithMockUser(username = "managerUser", authorities = "ROLE_MANAGER")
     @Test
     @DisplayName("GET /api/v1/products returns all products when successful")
