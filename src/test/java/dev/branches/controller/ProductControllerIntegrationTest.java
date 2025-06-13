@@ -1,7 +1,6 @@
 package dev.branches.controller;
 
 import dev.branches.config.IntegrationTest;
-import dev.branches.model.Product;
 import dev.branches.repository.ProductRepository;
 import dev.branches.utils.FileUtils;
 import org.junit.jupiter.api.*;
