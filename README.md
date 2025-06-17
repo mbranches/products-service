@@ -10,6 +10,8 @@
 - [Documentação](#-documentação-da-api)
 - [Exemplos de uso](#-exemplos-de-uso)
 - [Como Rodar a Aplicação](#-como-rodar-a-aplicação)
+- [Testes](#-testes)
+- [Testando a API com Swagger](#-testando-a-api-com-swagger)
 - [Testando a API com Postman](#-testando-a-api-com-postman)
 
 ## ⚙️ Funcionalidades
@@ -41,6 +43,7 @@
 - **Spring Boot** – Framework principal para criação da API REST.
 - **Spring Security** – Implementação da autenticação e autorização com JWT.
 - **Spring Doc** - Utilizado para documentar a API.
+- **Testcontainers** – Utilizado para testes de integração com instâncias reais do banco de dados MySQL em container.
 - **Spring Data JPA** – Integração com banco de dados usando repositórios e consultas com JPA.
 - **Hibernate** – Implementação ORM (mapeamento objeto-relacional) apenas para a validação do Schema.
 - **MySQL** – Banco de dados relacional utilizado na aplicação.
@@ -453,6 +456,34 @@ docker-compose up -d
 - Para executar a aplicação com o maven, execute:
 ```
 mvn spring-boot:run
+```
+
+## 🧪 Testes
+
+A aplicação possui cobertura com **testes unitários** e **testes de integração**, garantindo o correto funcionamento dos componentes e fluxos principais. Utilizamos **Testcontainers** para prover um ambiente real com MySQL durante os testes de integração.
+
+### 🧩 Testes Unitários
+
+- Testa isoladamente cada classe da camada de serviço;
+- Uso de **mocks com Mockito** para simular dependências e garantir teste de lógica pura.
+- Garantem que regras de negócio funcionem corretamente sem necessidade de infraestrutura.
+
+---
+
+### 🌐 Testes de Integração
+
+- Testam os **fluxos completos da aplicação**, do controller ao banco de dados.
+- Utilizam **MockMvc** e **Testcontainers (MySQL)** para garantir comportamento realista.
+- Incluem autenticação, controle de acesso, persistência, e resposta das APIs.
+
+---
+
+### ▶️ Como Executar os Testes
+
+Execute todos os testes com:
+
+```
+mvn test
 ```
 
 ## ✅ Testando a API com Swagger
